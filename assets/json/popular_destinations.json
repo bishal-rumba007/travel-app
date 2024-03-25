@@ -1,0 +1,44 @@
+[
+  {
+    "destination_id": "1",
+    "destination_name": "Monument to Salavat Yulaev ",
+    "rating": 4.9,
+    "destination_imageUrl": "assets/images/image1.png",
+    "category": "Historical Landmark",
+    "description": "Visit the iconic Monument to Salavat Yulaev in Ufa, Russia, and learn about the history of this legendary figure.",
+    "price": 90,
+    "insurance": true,
+    "meal": "Full Board",
+    "travel_time": "6 hour",
+    "guide_name": "Sophie Dubois",
+    "guide_imageUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBlcnNvbiUyMGltYWdlfGVufDB8fDB8fHww"
+  },
+  {
+    "destination_id": "2",
+    "destination_name": "Krasnyy klyuch spring",
+    "rating": 5.0,
+    "destination_imageUrl": "assets/images/image2.png",
+    "category": "Natural Attraction",
+    "description": "Explore the natural beauty of Krasnyy klyuch spring in Sochi, Russia, and enjoy the stunning views of the surrounding mountains.",
+    "price": 150,
+    "insurance": true,
+    "meal": "All-inclusive",
+    "travel_time": "3 days",
+    "guide_name": "Jake Smith",
+    "guide_imageUrl": "https://images.unsplash.com/photo-1618155530308-c37a780555e6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG1hbiUyMGltYWdlfGVufDB8fDB8fHww"
+  },
+  {
+    "destination_id": "3",
+    "destination_name": "Shulgaт-Tash cave ",
+    "rating": 4.7,
+    "destination_imageUrl": "assets/images/image3.png",
+    "category": "Cave",
+    "description": "Discover the ancient Shulgaт-Tash cave in Bashkortostan, Russia, and learn about the fascinating history of this natural wonder.",
+    "price": 120,
+    "insurance": true,
+    "meal": "Full Board",
+    "travel_time": "2 days",
+    "guide_name": "Azat Khabirov ",
+    "guide_imageUrl": "https://images.unsplash.com/photo-1597969892064-a7b26a98c335?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fG1hbiUyMGltYWdlJTIwQXphdCUyMEtoYWJpcm92fGVufDB8fDB8fHww"
+  }
+]
