@@ -25,7 +25,4 @@ class DestinationCategoryRepositoryImpl implements DestinationCategoryRepository
     }
   }
 
-
-
-
 }
