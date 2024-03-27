@@ -1,17 +1,17 @@
 [
   {
     "category_id": "1",
-    "category_name": "Beach",
-    "category_imageUrl": "https://example.com/images/beach.jpg"
+    "category_name": "Top 30 places",
+    "category_imageUrl": "assets/icons/star.svg"
   },
   {
     "category_id": "2",
-    "category_name": "Mountain",
-    "category_imageUrl": "https://example.com/images/mountain.jpg"
+    "category_name": "Nature",
+    "category_imageUrl": "assets/icons/trees.svg"
   },
   {
     "category_id": "3",
-    "category_name": "City",
-    "category_imageUrl": "https://example.com/images/city.jpg"
+    "category_name": "Food",
+    "category_imageUrl": "assets/icons/order.svg"
   }
 ]
