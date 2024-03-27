@@ -30,7 +30,6 @@ void main() {
         guideName: 'Sophie Dubois',
         guideImageUrl: 'https://example.com/guide1.jpg',
       ),
-      // Add more popular destinations as needed
     ];
 
     test('should return a list of PopularDestinationModel', () async {
