@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_app/core/themes/theme_export.dart';
+import 'package:travel_app/src/category/presentation/widgets/category_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -69,49 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SizedBox(height: 28.h,),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: Text(
-              "Category",
-              style: theme.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          SizedBox(height: 16.h,),
-          SizedBox(
-            height: 52.h,
-            child: ListView.separated(
-              itemCount: 3,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: index == 0 ? EdgeInsets.only(left: 24.w) : null,
-                  padding: EdgeInsets.only(left: 8.w, top: 8.h, right: 16.w, bottom: 8.h),
-                  height: 52.h,
-                  width: 164.w,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF8F8F8),
-                    borderRadius: BorderRadius.circular(16.r),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 36.h,
-                        width: 36.h,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.r),
-                          color: AppColor.beige,
-                        ),
-                        child: const Icon(Icons.star_rounded, color: Colors.white,),
-                      ),
-                    ],
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) => SizedBox(width: 12.w,),
-            ),
-          ),
+          const CategoryCard()
         ],
       )
     );

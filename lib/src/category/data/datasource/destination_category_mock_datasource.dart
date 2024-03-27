@@ -13,7 +13,7 @@ abstract class DestinationCategoryMockDataSource {
 class DestinationCategoryMockDataSourceImpl implements DestinationCategoryMockDataSource {
   @override
   Future<List<DestinationCategoryModel>> getDestinationCategories() async {
-    final jsonData = await rootBundle.loadString('assets/json/popular_destinations.json');
+    final jsonData = await rootBundle.loadString('assets/json/destination_categories.json');
     final popularDestinationsJson = json.decode(jsonData) as List<dynamic>;
 
 
