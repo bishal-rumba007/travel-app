@@ -6,33 +6,12 @@ import 'package:travel_app/core/themes/theme_export.dart';
 import 'package:travel_app/src/category/data/datasource/destination_category_mock_datasource.dart';
 import 'package:travel_app/src/category/data/repositories/destination_category_repository_impl.dart';
 import 'package:travel_app/src/category/domain/entities/destination_category.dart';
-import 'package:travel_app/src/category/domain/repositories/destination_category_repository.dart';
 import 'package:travel_app/src/category/domain/usecases/get_destination_category.dart';
 import 'package:travel_app/src/category/presentation/bloc/category_destination_bloc.dart';
 import 'package:travel_app/src/category/presentation/bloc/category_destination_event.dart';
 
-class CategoryCard extends StatefulWidget {
+class CategoryCard extends StatelessWidget {
   const CategoryCard({super.key});
-
-  @override
-  State<CategoryCard> createState() => _CategoryCardState();
-}
-
-class _CategoryCardState extends State<CategoryCard> {
-  late DestinationCategoryBloc destinationCategoryBloc;
-
-  DestinationCategoryRepository destinationCategoryRepository =
-      DestinationCategoryRepositoryImpl(
-          mockDataSource: DestinationCategoryMockDataSourceImpl());
-
-  @override
-  void initState() {
-    super.initState();
-    destinationCategoryBloc = DestinationCategoryBloc(
-        getDestinationCategory:
-            GetDestinationCategory(destinationCategoryRepository));
-    destinationCategoryBloc.add(FetchDestinationCategory());
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,24 +33,31 @@ class _CategoryCardState extends State<CategoryCard> {
         ),
         SizedBox(
           height: 52.h,
-          child:
-              BlocBuilder<DestinationCategoryBloc, List<DestinationCategory>>(
-            bloc: destinationCategoryBloc,
-            builder: (context, state) {
-              return state.isEmpty
-                  ? const Center(child: Text('No Categories!!'))
-                  : ListView.separated(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: state.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return buildSvgContainer(index, state, theme);
-                      },
-                      separatorBuilder: (context, index) => SizedBox(
-                        width: 12.w,
-                      ),
-                    );
-            },
+          child:BlocProvider(
+            create: (_) => DestinationCategoryBloc(
+              getDestinationCategory: GetDestinationCategory(
+                  DestinationCategoryRepositoryImpl(
+                      mockDataSource: DestinationCategoryMockDataSourceImpl()
+                  )
+              ),
+            )..add(FetchDestinationCategory()),
+            child: BlocBuilder<DestinationCategoryBloc, List<DestinationCategory>>(
+              builder: (context, state) {
+                return state.isEmpty
+                    ? const Center(child: Text('No Categories!!'))
+                    : ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: state.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return buildSvgContainer(index, state, theme);
+                  },
+                  separatorBuilder: (context, index) => SizedBox(
+                    width: 12.w,
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ],
