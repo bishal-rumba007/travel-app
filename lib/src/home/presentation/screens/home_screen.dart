@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_app/core/themes/theme_export.dart';
 import 'package:travel_app/src/category/presentation/widgets/category_card.dart';
+import 'package:travel_app/src/home/presentation/widgets/popular_destination_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -70,7 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SizedBox(height: 28.h,),
-          const CategoryCard()
+          const CategoryCard(),
+          SizedBox(height: 28.h,),
+          const PopularDestinationCard(),
         ],
       )
     );
