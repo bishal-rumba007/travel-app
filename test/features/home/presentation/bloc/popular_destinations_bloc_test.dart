@@ -10,6 +10,7 @@ import 'package:travel_app/src/home/domain/entities/popular_destination.dart';
 import 'package:travel_app/src/home/domain/usecases/get_popular_destinations.dart';
 import 'package:travel_app/src/home/presentation/blocs/popular_destinations_bloc.dart';
 import 'package:travel_app/src/home/presentation/blocs/popular_destinations_event.dart';
+import 'package:travel_app/src/home/presentation/blocs/popular_destinations_state.dart';
 
 class MockGetPopularDestinations extends Mock implements GetPopularDestinations {}
 
@@ -42,24 +43,24 @@ void main(){
       ),
     ];
 
-    blocTest<PopularDestinationsBloc, List<PopularDestination>>(
-      'emits [] when GetPopularDestinations returns a failure',
+      blocTest<PopularDestinationsBloc, PopularDestinationsState>(
+      'emits [PopularDestinationsError] when GetPopularDestinations returns a failure',
       build: (){
         when(() => mockGetPopularDestinations(NoParams())).thenAnswer((_) async => const Left(ServerFailure()));
         return bloc;
       },
       act: (bloc) => bloc.add(FetchPopularDestinations()),
-      expect: () => const <List<PopularDestination>>[[]],
+      expect: () => [const PopularDestinationsError(message: "Could not get Data!!")],
     );
 
-    blocTest<PopularDestinationsBloc, List<PopularDestination>>(
-      'emits [popularDestinations] when GetPopularDestinations returns a list of popular destinations]',
+    blocTest<PopularDestinationsBloc, PopularDestinationsState>(
+      'emits [PopularDestinationsLoaded] when GetPopularDestinations returns a list of popular destinations',
       build: (){
         when(() => mockGetPopularDestinations(NoParams())).thenAnswer((_) async => Right(popularDestinations));
         return bloc;
       },
       act: (bloc) => bloc.add(FetchPopularDestinations()),
-      expect: () => [popularDestinations],
+      expect: () => [PopularDestinationsLoaded(popularDestinations: popularDestinations)],
     );
   });
 }
