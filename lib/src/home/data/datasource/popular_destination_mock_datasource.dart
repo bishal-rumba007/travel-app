@@ -10,6 +10,8 @@ abstract class PopularDestinationsMockDataSource {
 class PopularDestinationsMockDataSourceImpl implements PopularDestinationsMockDataSource {
   @override
   Future<List<PopularDestinationModel>> getPopularDestinations() async {
+    // Simulating network request
+    await Future.delayed(const Duration(seconds: 2));
     final jsonData = await rootBundle.loadString('assets/json/popular_destinations.json');
     final popularDestinationsJson = json.decode(jsonData) as List<dynamic>;
 
