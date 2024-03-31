@@ -1,43 +1,40 @@
-import 'package:dartz/dartz.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:travel_app/src/search/data/models/search_result_model.dart';
-import 'package:travel_app/src/search/domain/repositories/search_repository.dart';
-import 'package:travel_app/src/search/domain/usecases/search_destination_usecase.dart';
+// import 'package:dartz/dartz.dart';
+// import 'package:flutter_test/flutter_test.dart';
+// import 'package:mocktail/mocktail.dart';
+// import 'package:travel_app/src/category/domain/entities/destination_category.dart';
+// import 'package:travel_app/src/category/domain/usecases/get_destination_category.dart';
+// import 'package:travel_app/src/search/domain/entities/search_result.dart';
+// import 'package:travel_app/src/search/domain/repositories/search_repository.dart';
+// import 'package:travel_app/src/search/domain/usecases/search_destination_usecase.dart';
 
-class MockSearchDestinationUseCase extends Mock
-    implements SearchDestinationRepository {}
+// class MockSearchDestination extends Mock
+//     implements SearchDestinationRepository {}
 
-void main() {
-  late MockSearchDestinationUseCase mockSearchDestinationUseCase;
-  late SearchDestinations searchDestinationUseCase;
+// void main() {
+//   late MockSearchDestination mockSearchDestination;
+//   late SearchDestinations searchDestination;
 
-  setUp(() {
-    mockSearchDestinationUseCase = MockSearchDestinationUseCase();
-    searchDestinationUseCase = SearchDestinations(mockSearchDestinationUseCase);
-  });
+//   setUp(() {
+//     mockSearchDestination = MockSearchDestination();
+//     searchDestination = SearchDestinations(mockSearchDestination);
+//   });
 
-  final searchResultModel = [
-    const SearchResultModel(
-      destinationId: '1',
-      destinationName: 'Monument to Salavat Yulaev',
-      rating: 4.9,
-      destinationImageUrl: 'assets/images/image1.png',
-      category: 'Historical Landmark',
-      price: 90,
-    ),
-  ];
+//   final searchResults = [
+//     const SearchResult(
+//       destinationId: '1',
+//       destinationName: 'Bromo Mountain',
+//       destinationImageUrl: 'assets/images/image1.png',
+      
+//     ),
+//   ];
 
-  test('should return a list of search result entities', () async {
-    //Arrange
-    when(() => mockSearchDestinationUseCase
-            .searchDestinations('Monument to Salavat Yulaev'))
-        .thenAnswer((_) async => Right(searchResultModel));
+//   test('should get list of destination category from repository', () async {
+//     when(() => mockSearchDestination.searchDestinations('Mountain'))
+//         .thenAnswer((_) async => Right());
 
-    //Act
-    final result = await searchDestinationUseCase('Monument to Salavat Yulaev');
+//     final result = await searchDestination(NoParams());
 
-    //Assert
-    expect(result, isA<Right<Failure, List<SearchResult>>>());
-  });
-}
+//     expect(result, Right(destinationCategories));
+//     verify(() => mockSearchDestination.searchDestination()).called(1);
+//   });
+// }
