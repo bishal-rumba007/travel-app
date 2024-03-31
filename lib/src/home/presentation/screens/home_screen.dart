@@ -1,12 +1,11 @@
 
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_app/core/themes/theme_export.dart';
 import 'package:travel_app/src/category/presentation/widgets/category_card.dart';
 import 'package:travel_app/src/home/presentation/widgets/popular_destination_card.dart';
+import 'package:travel_app/src/search/presentation/widgets/search_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -54,19 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 SizedBox(height: 24.h,),
-                GestureDetector(
-                  onTap: () {},
-                  child: TextField(
-                    enabled: false,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                        fontSize: 15.sp
-                    ),
-                    decoration: InputDecoration(
-                      hintText: "Enter name or category",
-                      suffixIcon: Icon(CupertinoIcons.search, size: 20.h,),
-                    ),
-                  ),
-                ),
+                SearchBarWidget(theme: theme,),
               ],
             ),
           ),
