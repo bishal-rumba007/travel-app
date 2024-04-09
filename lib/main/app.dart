@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:travel_app/core/common/route_manager.dart';
 import 'package:travel_app/core/themes/theme.dart';
 
 import '../src/home/presentation/screens/home_screen.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: lightMode,
+          onGenerateRoute: RouteGenerator.generateRoute,
           home: const HomeScreen(),
         );
       },
