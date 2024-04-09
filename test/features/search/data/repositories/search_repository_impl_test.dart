@@ -59,7 +59,7 @@ void main() {
       //Assert
       expect(result, isA<Left<Failure, List<SearchResult>>>());
       result.fold(
-        (failure) => expect(failure, const ServerFailure()),
+        (failure) => expect(failure, const ServerFailure("Server Failure")),
         (destinationCategories) =>
             fail('Should not return destinationCategories'),
       );
@@ -78,7 +78,7 @@ void main() {
       //Assert
       expect(result, isA<Left<Failure, List<SearchResult>>>());
       result.fold(
-        (failure) => expect(failure, const ServerFailure()),
+        (failure) => expect(failure, isA<ServerFailure>()),
         (destinationCategories) =>
             fail('Should not return destinationCategories'),
       );

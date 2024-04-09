@@ -19,9 +19,9 @@ class DestinationCategoryRepositoryImpl implements DestinationCategoryRepository
       final destinationCategories = destinationCategoryModels.map((model) => model).toList();
       return Right(destinationCategories);
     } on ServerException{
-      return const Left(ServerFailure());
+      return const Left(ServerFailure("Server Failure"));
     } on CacheException{
-      return const Left(CacheFailure());
+      return const Left(CacheFailure("Cache Failure"));
     }
   }
 

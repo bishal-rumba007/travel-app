@@ -46,7 +46,7 @@ void main(){
       blocTest<PopularDestinationsBloc, PopularDestinationsState>(
       'emits [PopularDestinationsError] when GetPopularDestinations returns a failure',
       build: (){
-        when(() => mockGetPopularDestinations(NoParams())).thenAnswer((_) async => const Left(ServerFailure()));
+        when(() => mockGetPopularDestinations(NoParams())).thenAnswer((_) async => const Left(ServerFailure("Could not get Data!!")));
         return bloc;
       },
       act: (bloc) => bloc.add(FetchPopularDestinations()),

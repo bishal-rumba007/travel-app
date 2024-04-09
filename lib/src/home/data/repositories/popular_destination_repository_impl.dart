@@ -17,9 +17,9 @@ class PopularDestinationsRepositoryImpl implements PopularDestinationsRepository
       final popularDestinations = popularDestinationModels.map((model) => model).toList();
       return Right(popularDestinations);
     } on ServerException {
-      return const Left(ServerFailure());
+      return const Left(ServerFailure("Server Failure"));
     } on CacheException {
-      return const Left(CacheFailure());
+      return const Left(CacheFailure("Cache Failure"));
     }
   }
 }

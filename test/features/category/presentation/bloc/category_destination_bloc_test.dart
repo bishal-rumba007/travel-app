@@ -35,7 +35,7 @@ void main() {
     blocTest<DestinationCategoryBloc, List<DestinationCategory>>(
       'emits [] when GetDestinationCategory returns a failure ',
       build: (){
-        when(() => mockDestinationCategory.call(NoParams())).thenAnswer((_) async => const Left(ServerFailure()));
+        when(() => mockDestinationCategory.call(NoParams())).thenAnswer((_) async => const Left(ServerFailure("Server Failure")));
         return bloc;
       },
       act: (bloc) => bloc.add(FetchDestinationCategory()),
