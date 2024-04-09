@@ -12,10 +12,13 @@ class SearchDestinationRepositoryImpl implements SearchDestinationRepository{
   @override
   Future<Either<Failure, List<SearchResult>>> searchDestinations(String query) async {
     try {
-      final searchResults = await dataSource.searchDestination();
+      final data = await dataSource.searchDestination();
+      final searchResults = data.where((element) {
+        return element.destinationName.toLowerCase().contains(query.toLowerCase()) || element.category.toLowerCase().contains(query.toLowerCase());
+      }).toList();
       return Right(searchResults);
     } catch (e) {
-      return const Left(ServerFailure());
+      return const Left(ServerFailure("Server Failure"));
     }
   }
 }

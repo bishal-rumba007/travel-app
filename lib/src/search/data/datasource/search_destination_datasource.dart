@@ -13,13 +13,13 @@ abstract class SearchDestinationDataSource{
 
 
 class SearchDestinationDataSourceImpl implements SearchDestinationDataSource{
+
   @override
   Future<List<SearchResultModel>> searchDestination() async {
     // Simulating network request
     await Future.delayed(const Duration(seconds: 2));
     final jsonData = await rootBundle.loadString('assets/json/search-data.json');
     final searchDestinationsJson = json.decode(jsonData) as List<dynamic>;
-
     final searchDestinations = searchDestinationsJson
         .map((json) => SearchResultModel.fromJson(json))
         .toList();

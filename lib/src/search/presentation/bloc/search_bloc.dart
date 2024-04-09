@@ -1,28 +1,40 @@
-
-
-
-
 import 'package:bloc/bloc.dart';
+import 'package:travel_app/src/search/domain/entities/search_result.dart';
 import 'package:travel_app/src/search/domain/usecases/search_destination_usecase.dart';
 import 'package:travel_app/src/search/presentation/bloc/search_event.dart';
 import 'package:travel_app/src/search/presentation/bloc/search_state.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final SearchDestinations searchDestinations;
-  SearchBloc({required this.searchDestinations}) : super(const SearchState.initial());
+  List<SearchResult> currentSearchResults = [];
 
-  Stream<SearchState> mapEventToState(SearchEvent event) async* {
-    if (event is SearchDestination) {
-      yield const SearchState.loading();
-      try {
-        final searchResult = await searchDestinations.search(event.query);
-        yield searchResult.fold(
-              (failure) => SearchState.error(failure.toString()),
-              (popularDestinations) => SearchState.loaded(popularDestinations),
-        );
-      } catch (e) {
-        yield SearchState.error(e.toString());
-      }
-    }
+  SearchBloc({required this.searchDestinations}) : super(const SearchState.initial()) {
+    on<Search>((event, emit) async {
+      emit(const SearchState.loading());
+      final result = await searchDestinations.search(event.query);
+      result.fold(
+            (failure) {
+          emit(SearchState.error(failure.message));
+        },
+            (searchResults) {
+          currentSearchResults = searchResults;
+          emit(SearchState.loaded(currentSearchResults));
+        },
+      );
+    });
+
+    on<LoadMore>((event, emit) async {
+      emit(const SearchState.loading());
+      final result = await searchDestinations.search(event.query);
+      result.fold(
+            (failure) {
+          emit(SearchState.error(failure.message));
+        },
+            (searchResults) {
+          currentSearchResults.addAll(searchResults);
+          emit(SearchState.loaded(currentSearchResults));
+        },
+      );
+    });
   }
 }

@@ -1,7 +1,4 @@
 
-
-
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:travel_app/src/search/domain/entities/search_result.dart';
 

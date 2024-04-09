@@ -16,17 +16,14 @@ class SearchBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: TextField(
-        enabled: false,
-        style: theme.textTheme.bodyMedium?.copyWith(
-            fontSize: 15.sp
-        ),
-        decoration: InputDecoration(
-          hintText: "Enter name or category",
-          suffixIcon: Icon(CupertinoIcons.search, size: 20.h,),
-        ),
+    return TextField(
+      enabled: false,
+      style: theme.textTheme.bodyMedium?.copyWith(
+          fontSize: 15.sp
+      ),
+      decoration: InputDecoration(
+        hintText: "Enter name or category",
+        suffixIcon: Icon(CupertinoIcons.search, size: 20.h,),
       ),
     );
   }
