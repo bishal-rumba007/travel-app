@@ -13,6 +13,7 @@ class SearchDestinationRepositoryImpl implements SearchDestinationRepository{
   Future<Either<Failure, List<SearchResult>>> searchDestinations(String query) async {
     try {
       final data = await dataSource.searchDestination();
+      print(data);
       final searchResults = data.where((element) {
         return element.destinationName.toLowerCase().contains(query.toLowerCase()) || element.category.toLowerCase().contains(query.toLowerCase());
       }).toList();

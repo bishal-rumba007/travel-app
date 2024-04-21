@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travel_app/src/search/data/datasource/search_destination_datasource.dart';
+import 'package:travel_app/src/search/data/repositories/search_destination_repository_impl.dart';
+import 'package:travel_app/src/search/domain/usecases/search_destination_usecase.dart';
 import 'package:travel_app/src/search/presentation/bloc/search_bloc.dart';
 import 'package:travel_app/src/search/presentation/bloc/search_event.dart';
 import 'package:travel_app/src/search/presentation/bloc/search_state.dart';
@@ -20,7 +23,6 @@ class _SearchDestinationScreenState extends State<SearchDestinationScreen> {
   @override
   void initState() {
     super.initState();
-    _searchBloc = context.read<SearchBloc>();
   }
 
   @override
@@ -38,55 +40,64 @@ class _SearchDestinationScreenState extends State<SearchDestinationScreen> {
         appBar: AppBar(
           title: const Text('Search Destinations'),
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 16.h,
-              ),
-              TextField(
-                onChanged: (value) {
-                  _searchBloc.add(Search(query: value));
-                },
-                style: theme.textTheme.bodyMedium?.copyWith(
-                    fontSize: 15.sp
+        body: BlocProvider(
+          create: (context) {
+            return _searchBloc = SearchBloc(searchDestinations: SearchDestinations(
+              SearchDestinationRepositoryImpl(
+                dataSource: SearchDestinationDataSourceImpl()
+              )
+            ));
+          },
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 16.h,
                 ),
-                decoration: InputDecoration(
-                  hintText: "Enter name or category",
-                  suffixIcon: Icon(CupertinoIcons.search, size: 20.h,),
+                TextField(
+                  onChanged: (value) {
+                    _searchBloc.add(Search(query: value));
+                  },
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                      fontSize: 15.sp
+                  ),
+                  decoration: InputDecoration(
+                    hintText: "Enter name or category",
+                    suffixIcon: Icon(CupertinoIcons.search, size: 20.h,),
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 16.h,
-              ),
-              BlocBuilder<SearchBloc, SearchState>(
-                builder: (context, state) {
-                  return state.when(
-                    initial: () => const SizedBox(),
-                    loading: () => const Center(child: CircularProgressIndicator.adaptive()),
-                    loaded: (results) {
-                      return results.isEmpty ? const Center(
-                        child: Text('No results found'),
-                      ) :
-                      ListView.builder(
-                        itemCount: results.length,
-                        itemBuilder: (context, index) {
-                          final result = results[index];
-                          return ListTile(
-                            title: Text(result.destinationName),
-                            subtitle: Text(result.category),
-                          );
-                        },
-                      );
-                    },
-                    error: (message) => Center(
-                      child: Text(message),
-                    )
-                  );
-                },
-              ),
-            ],
+                SizedBox(
+                  height: 16.h,
+                ),
+                BlocBuilder<SearchBloc, SearchState>(
+                  builder: (context, state) {
+                    return state.when(
+                      initial: () => const SizedBox(),
+                      loading: () => const Center(child: CircularProgressIndicator.adaptive()),
+                      loaded: (results) {
+                        return results.isEmpty ? const Center(
+                          child: Text('No results found'),
+                        ) :
+                        ListView.builder(
+                          itemCount: results.length,
+                          itemBuilder: (context, index) {
+                            final result = results[index];
+                            return ListTile(
+                              title: Text(result.destinationName),
+                              subtitle: Text(result.category),
+                            );
+                          },
+                        );
+                      },
+                      error: (message) => Center(
+                        child: Text(message),
+                      )
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
