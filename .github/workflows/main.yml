@@ -30,7 +30,7 @@ jobs:
       - run: flutter test
 
   build_apk:
-    name: "Building APK"
+    name: "Building and Release APK"
     needs: [flutter_test]
     runs-on: ubuntu-latest
 
@@ -57,3 +57,20 @@ jobs:
 
       - name: Build APK
         run: flutter build apk
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: build/app/outputs/flutter-apk/app-release.apk
+          token: ${{ secrets.TOKEN }}
+          release_name: Release ${{ github.run_number }}
+          release_body: "Release ${{ github.run_number }}"
+          tag: v1.0.${{ github.run_number }}
+          draft: false
+          prerelease: false
